@@ -1,6 +1,6 @@
 # Curso de REST APIs com Spring Boot, Kotlin e Docker
 
-Acompanhamento do curso de REST APIs com Spring Boot, Kotlin e Docker, ministrado pelo professor [Leandro Costa]
+Acompanhamento do curso de REST APIs com Spring Boot, Kotlin e Docker, ministrado pelo professor Leandro Costa.
 
 ## Descrição
 
