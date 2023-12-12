@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.concurrent.atomic.AtomicLong
+import java.lang.Math
 
 @RestController // Esta anotação é responsável por informar ao Spring que esta classe é um RestController
 class MathController {
@@ -15,7 +16,8 @@ class MathController {
     fun sum(@PathVariable(value="numberOne") numberOne: String?, // Esta anotação é responsável por informar ao Spring que este parâmetro será recebido da URL
             @PathVariable(value="numberTwo") numberTwo: String? // Esta anotação é responsável por informar ao Spring que este parâmetro será recebido da URL
     ): Double { // Esta anotação é responsável por informar ao Spring que este método retornará um Double
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception("Please insert a valid value!")
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+			throw Exception("Please set a numeric value!")
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
     }
 
@@ -24,7 +26,7 @@ class MathController {
 			@PathVariable(value="numberTwo") numberTwo: String?
 	): Double {
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
-			throw Exception("Please insert a valid value!")
+			throw Exception("Please set a numeric value!")
 		return convertToDouble(numberOne) - convertToDouble(numberTwo)
 	}
 
@@ -33,7 +35,7 @@ class MathController {
 			@PathVariable(value="numberTwo") numberTwo: String?
 	): Double {
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
-			throw Exception("Please insert a valid value!")
+			throw Exception("Please set a numeric value!")
 		return convertToDouble(numberOne) * convertToDouble(numberTwo)
 	}
 
@@ -42,8 +44,25 @@ class MathController {
 			@PathVariable(value="numberTwo") numberTwo: String?
 	): Double {
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
-			throw Exception("Please insert a valid value!")
+			throw Exception("Please set a numeric value!")
 		return convertToDouble(numberOne) / convertToDouble(numberTwo)
+	}
+
+	@RequestMapping(value = ["/med/{numberOne}/{numberTwo}/"])
+	fun med(@PathVariable(value="numberOne") numberOne: String?,
+			@PathVariable(value="numberTwo") numberTwo: String?
+	): Double {
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+			throw Exception("Please set a numeric value!")
+		return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2
+	}
+
+	@RequestMapping(value = ["/raiz/{numberOne}/"])
+	fun raiz(@PathVariable(value="numberOne") numberOne: String?
+	): Double {
+		if (!isNumeric(numberOne))
+			throw Exception("Please set a numeric value!")
+		return Math.sqrt(convertToDouble(numberOne))
 	}
 
 	private fun convertToDouble(strNumber: String?): Double { // Esta função é responsável por converter uma String para Double
