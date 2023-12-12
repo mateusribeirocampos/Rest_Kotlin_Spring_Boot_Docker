@@ -15,7 +15,7 @@ class MathController {
     fun sum(@PathVariable(value="numberOne") numberOne: String?, // Esta anotação é responsável por informar ao Spring que este parâmetro será recebido da URL
             @PathVariable(value="numberTwo") numberTwo: String? // Esta anotação é responsável por informar ao Spring que este parâmetro será recebido da URL
     ): Double { // Esta anotação é responsável por informar ao Spring que este método retornará um Double
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception("Numero invalido!")
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw Exception("Please insert a valid value!")
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
     }
 
