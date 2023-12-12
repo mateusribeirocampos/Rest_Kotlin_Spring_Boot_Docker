@@ -19,6 +19,33 @@ class MathController {
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
     }
 
+	@RequestMapping(value = ["/sub/{numberOne}/{numberTwo}/"])
+	fun sub(@PathVariable(value="numberOne") numberOne: String?,
+			@PathVariable(value="numberTwo") numberTwo: String?
+	): Double {
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+			throw Exception("Please insert a valid value!")
+		return convertToDouble(numberOne) - convertToDouble(numberTwo)
+	}
+
+	@RequestMapping(value = ["/mult/{numberOne}/{numberTwo}/"])
+	fun mult(@PathVariable(value="numberOne") numberOne: String?,
+			@PathVariable(value="numberTwo") numberTwo: String?
+	): Double {
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+			throw Exception("Please insert a valid value!")
+		return convertToDouble(numberOne) * convertToDouble(numberTwo)
+	}
+
+	@RequestMapping(value = ["/div/{numberOne}/{numberTwo}/"])
+	fun div(@PathVariable(value="numberOne") numberOne: String?,
+			@PathVariable(value="numberTwo") numberTwo: String?
+	): Double {
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+			throw Exception("Please insert a valid value!")
+		return convertToDouble(numberOne) / convertToDouble(numberTwo)
+	}
+
 	private fun convertToDouble(strNumber: String?): Double { // Esta função é responsável por converter uma String para Double
 		if (strNumber.isNullOrBlank()) return 0.0  // Esta função é responsável por converter uma String para Double
 		val number = strNumber.replace(",".toRegex(), ".") // substitui a vírgula por ponto
