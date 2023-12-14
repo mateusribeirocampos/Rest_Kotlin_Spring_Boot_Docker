@@ -1,4 +1,4 @@
-package br.com.campos
+package br.com.campos.exceptions
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

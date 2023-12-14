@@ -1,4 +1,4 @@
-package br.com.campos
+package br.com.campos.exceptions
 
 import java.util.*
 
