@@ -3,7 +3,7 @@ package br.com.campos
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication
+@SpringBootApplication  //application spring boot
 class Startup
 
 
