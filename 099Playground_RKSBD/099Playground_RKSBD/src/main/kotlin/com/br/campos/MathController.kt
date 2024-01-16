@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.concurrent.atomic.AtomicLong
-import java.util.*
+import java.lang.*
 
 @RestController
 class MathController {
@@ -20,8 +20,54 @@ class MathController {
             // tratamento do erro
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
-
     }
+    @RequestMapping(value = ["/sub/{numberOne}/{numberTwo}"])
+    fun sub(@PathVariable(value = "numberOne") numberOne: String?,
+            @PathVariable(value = "numberTwo") numberTwo: String
+    ): Double {
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
+        return convertToDouble(numberOne) - convertToDouble(numberTwo)
+    }
+    @RequestMapping(value = ["/mult/{numberOne}/{numberTwo}"])
+    fun mult(@PathVariable(value = "numberOne") numberOne: String?,
+            @PathVariable(value = "numberTwo") numberTwo: String
+    ): Double {
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
+        return convertToDouble(numberOne) * convertToDouble(numberTwo)
+    }
+    @RequestMapping(value = ["/div/{numberOne}/{numberTwo}"])
+    fun div(@PathVariable(value = "numberOne") numberOne: String?,
+            @PathVariable(value = "numberTwo") numberTwo: String
+    ): Double {
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
+        return convertToDouble(numberOne) / convertToDouble(numberTwo)
+    }
+    @RequestMapping(value = ["/mean/{numberOne}/{numberTwo}"])
+    fun mean(@PathVariable(value = "numberOne") numberOne: String?,
+            @PathVariable(value = "numberTwo") numberTwo: String
+    ): Double {
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2
+    }
+    @RequestMapping(value = ["/sqrt/{numberOne}"])
+    fun sqrt(@PathVariable(value = "numberOne") numberOne: String?
+    ): Double {
+        if(!isNumeric(numberOne))
+            throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
+        return kotlin.math.sqrt(convertToDouble(numberOne))
+    }
+    @RequestMapping(value = ["/log2/{numberOne}"])
+    fun log2(@PathVariable(value = "numberOne") numberOne: String?
+    ): Double {
+        if(!isNumeric(numberOne))
+            throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
+        return kotlin.math.log2(convertToDouble(numberOne))
+    }
+
     // Função convertToDouble para converter String em Double
     private fun convertToDouble(strNumber: String?): Double {
         // Se o numero inserido for nulo ou sem numbero retorna 0.0

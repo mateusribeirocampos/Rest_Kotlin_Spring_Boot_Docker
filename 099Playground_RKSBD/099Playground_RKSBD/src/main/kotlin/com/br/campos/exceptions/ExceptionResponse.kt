@@ -5,5 +5,6 @@ import java.util.*
 class ExceptionResponse (
     val timestamp: Date,
     val message: String?,
-    val details: String
+    val details: String,
+    val status: Int,
 )

@@ -23,7 +23,8 @@ class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(
         val exceptionResponse = ExceptionResponse( // cria um objeto do tipo ExceptionResponse
             Date(),  // data atual
             ex.message,  // mensagem da exceção
-            request.getDescription(false) // descrição da exceção
+            request.getDescription(false), // descrição da exceção
+            status = HttpStatus.INTERNAL_SERVER_ERROR.value() // status da exceção
         )
         return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR) // retorna o erro 500 (INTERNAL_SERVER_ERROR)
     }
@@ -36,7 +37,8 @@ class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(
         val exceptionResponse = ExceptionResponse( // cria um objeto do tipo ExceptionResponse
             Date(),  // data atual
             ex.message,  // mensagem da exceção
-            request.getDescription(false) // descrição da exceção
+            request.getDescription(false), // descrição da exceção
+            status = HttpStatus.BAD_REQUEST.value() // status da exceção
         )
         return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.BAD_REQUEST) // retorna o erro 400 (BAD_REQUEST)
     }
