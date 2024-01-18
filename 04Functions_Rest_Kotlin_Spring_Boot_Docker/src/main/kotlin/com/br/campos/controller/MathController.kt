@@ -1,8 +1,10 @@
 package com.br.campos.controller
 
+import com.br.campos.converters.NumberConverter
 import com.br.campos.exceptions.UnsupportedMathOperationException
-import com.br.campos.functions.NumberConverter.convertToDouble
-import com.br.campos.functions.NumberConverter.isNumeric
+import com.br.campos.converters.NumberConverter.convertToDouble
+import com.br.campos.converters.NumberConverter.isNumeric
+import com.br.campos.functions.SimpleMath
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -13,6 +15,8 @@ class MathController {
 
     val counter: AtomicLong = AtomicLong()
 
+    private val math: SimpleMath = SimpleMath()
+
     @RequestMapping(value = ["/sum/{numberOne}/{numberTwo}"])
     fun sum(
         @PathVariable(value = "numberOne") numberOne: String?,
@@ -21,7 +25,7 @@ class MathController {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
         // tratamento do erro
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
-        return convertToDouble(numberOne) + convertToDouble(numberTwo)
+        return math.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
     @RequestMapping(value = ["/sub/{numberOne}/{numberTwo}"])
@@ -31,7 +35,7 @@ class MathController {
     ): Double {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
-        return convertToDouble(numberOne) - convertToDouble(numberTwo)
+        return math.sub(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
     @RequestMapping(value = ["/mult/{numberOne}/{numberTwo}"])
@@ -41,7 +45,7 @@ class MathController {
     ): Double {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
-        return convertToDouble(numberOne) * convertToDouble(numberTwo)
+        return math.mult(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
     @RequestMapping(value = ["/div/{numberOne}/{numberTwo}"])
@@ -51,7 +55,7 @@ class MathController {
     ): Double {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
-        return convertToDouble(numberOne) / convertToDouble(numberTwo)
+        return math.div(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
     @RequestMapping(value = ["/mean/{numberOne}/{numberTwo}"])
@@ -61,7 +65,7 @@ class MathController {
     ): Double {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
-        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2
+        return math.mean(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
     @RequestMapping(value = ["/sqrt/{numberOne}"])
@@ -70,7 +74,7 @@ class MathController {
     ): Double {
         if (!isNumeric(numberOne))
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
-        return kotlin.math.sqrt(convertToDouble(numberOne))
+        return math.sqrt(NumberConverter.convertToDouble(numberOne))
     }
 
     @RequestMapping(value = ["/log2/{numberOne}"])
@@ -79,6 +83,6 @@ class MathController {
     ): Double {
         if (!isNumeric(numberOne))
             throw UnsupportedMathOperationException("Por favor, insira um número válido!\nPlease set a numeric value!")
-        return kotlin.math.log2(convertToDouble(numberOne))
+        return math.log2(NumberConverter.convertToDouble(numberOne))
     }
 }

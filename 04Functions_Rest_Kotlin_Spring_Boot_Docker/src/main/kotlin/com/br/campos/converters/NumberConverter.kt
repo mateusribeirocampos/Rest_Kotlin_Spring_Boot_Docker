@@ -1,4 +1,4 @@
-package com.br.campos.functions
+package com.br.campos.converters
 
 object NumberConverter {
     // Função convertToDouble para converter String em Double
