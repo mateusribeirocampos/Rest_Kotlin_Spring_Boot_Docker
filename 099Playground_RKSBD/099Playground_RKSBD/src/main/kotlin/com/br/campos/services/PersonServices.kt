@@ -20,7 +20,7 @@ class PersonServices {
     // Método para encontrar uma pessoa pelo ID.
     fun findById(id: Long): Person {
         // Registrando uma mensagem de log informando que está procurando uma pessoa pelo ID.
-        logger.info("Find a person by id")
+        logger.info("Finding one person!")
 
         // Criando uma instância de Person com dados fictícios.
         val person = Person()
