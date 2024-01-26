@@ -5,6 +5,7 @@ import br.com.campos.services.PersonServices
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
@@ -16,6 +17,13 @@ class PersonController {
 	@Autowired // Esta anotação é responsável por informar ao Spring que esta variável será injetada
 	private lateinit var services: PersonServices
 
+	@RequestMapping(
+		method = [RequestMethod.GET],
+		produces = [MediaType.APPLICATION_JSON_VALUE])
+
+	fun findById(): List<Person> {
+		return services.findAll()
+	}
 
 	@RequestMapping(
 		value = ["/{id}"],
@@ -28,10 +36,26 @@ class PersonController {
 	}
 
 	@RequestMapping(
-		method = [RequestMethod.GET],
+		method = [RequestMethod.POST],
+		consumes = [MediaType.APPLICATION_JSON_VALUE],
 		produces = [MediaType.APPLICATION_JSON_VALUE])
+	fun create(@RequestBody person: Person): Person {
+		return services.create(person)
+	}
 
-	fun findById(): List<Person> {
-		return services.findAll()
+	@RequestMapping(
+		method = [RequestMethod.PUT],
+		consumes = [MediaType.APPLICATION_JSON_VALUE],
+		produces = [MediaType.APPLICATION_JSON_VALUE])
+	fun update(@RequestBody person: Person): Person {
+		return services.update(person)
+	}
+
+	@RequestMapping(
+		value = ["/{id}"],
+		method = [RequestMethod.DELETE],
+		produces = [MediaType.APPLICATION_JSON_VALUE])
+	fun delete(@PathVariable(value="id") id: Long) {
+		services.delete(id)
 	}
 }
