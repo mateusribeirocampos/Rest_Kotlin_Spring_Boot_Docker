@@ -14,7 +14,7 @@ class PersonServices {
     private val logger = Logger.getLogger(PersonServices::class.java.name)
 
     fun findById(id: Long): Person {
-        logger.info("find a person by id")
+        logger.info("finding one person!")
 
         val person = Person()
         person.id = counter.incrementAndGet()

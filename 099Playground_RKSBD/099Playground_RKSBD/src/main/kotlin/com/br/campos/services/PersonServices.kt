@@ -35,4 +35,31 @@ class PersonServices {
         // Retornando a instância de Person criada.
         return person
     }
+
+    fun findAll(): List<Person> {
+        // Registrando uma mensagem de log informando que está procurando uma pessoa pelo ID.
+        logger.info("Finding one person!")
+
+        val persons: MutableList<Person> = ArrayList()
+        for (i in 0..10){
+            val person = mockPerson(i)
+            persons.add(person)
+        }
+        return persons
+    }
+
+    private fun mockPerson(i: Int): Person {
+        // Criando uma instância de Person com dados fictícios.
+        val person = Person()
+        person.id = counter.incrementAndGet() // Aumentando o contador e atribuindo o valor como ID da pessoa.
+        person.firstName = "First Name $i"
+        person.lastName = "Last Name $i"
+        person.birthday = "1981-01-01"
+        person.age = 42
+        person.address = "Rua dos Rios, $i+1"
+        person.gender = "Male"
+
+        // Retornando a instância de Person criada.
+        return person
+    }
 }

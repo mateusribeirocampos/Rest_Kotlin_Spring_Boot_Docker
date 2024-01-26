@@ -37,4 +37,14 @@ class PersonController {
         // O resultado será automaticamente convertido para JSON e retornado como resposta.
         return services.findById(id)
     }
+
+    @RequestMapping(
+        method = [RequestMethod.GET],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun findById(): List<Person> {
+        // O método chama services.findById(id) para obter uma instância de Person com o ID fornecido.
+        // O resultado será automaticamente convertido para JSON e retornado como resposta.
+        return services.findAll()
+    }
 }

@@ -17,7 +17,9 @@ class PersonController {
 	private lateinit var services: PersonServices
 
 
-	@RequestMapping(value = ["/{id}"], method = [RequestMethod.GET],
+	@RequestMapping(
+		value = ["/{id}"],
+		method = [RequestMethod.GET],
 		produces = [MediaType.APPLICATION_JSON_VALUE])
 
 	fun findById(@PathVariable(value="id") id: Long,
@@ -25,7 +27,8 @@ class PersonController {
 		return services.findById(id)
 	}
 
-	@RequestMapping(method = [RequestMethod.GET],
+	@RequestMapping(
+		method = [RequestMethod.GET],
 		produces = [MediaType.APPLICATION_JSON_VALUE])
 
 	fun findById(): List<Person> {
