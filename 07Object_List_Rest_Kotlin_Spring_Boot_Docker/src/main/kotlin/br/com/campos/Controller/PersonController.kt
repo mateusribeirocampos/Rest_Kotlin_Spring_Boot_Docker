@@ -58,4 +58,5 @@ class PersonController {
 	fun delete(@PathVariable(value="id") id: Long) {
 		services.delete(id)
 	}
+
 }
