@@ -16,7 +16,17 @@ class PersonServices {
 
     // Um logger para registrar mensagens. Neste caso, está configurado para logar mensagens para a classe PersonServices.
     private val logger = Logger.getLogger(PersonServices::class.java.name)
+    fun findAll(): List<Person> {
+        // Registrando uma mensagem de log informando que está procurando uma pessoa pelo ID.
+        logger.info("Finding one person!")
 
+        val persons: MutableList<Person> = ArrayList()
+        for (i in 0..10){
+            val person = mockPerson(i)
+            persons.add(person)
+        }
+        return persons
+    }
     // Método para encontrar uma pessoa pelo ID.
     fun findById(id: Long): Person {
         // Registrando uma mensagem de log informando que está procurando uma pessoa pelo ID.
@@ -36,16 +46,30 @@ class PersonServices {
         return person
     }
 
-    fun findAll(): List<Person> {
-        // Registrando uma mensagem de log informando que está procurando uma pessoa pelo ID.
-        logger.info("Finding one person!")
+    // Método para criar uma nova pessoa.
+    fun create(person: Person): Person {
+        // Registrando uma mensagem de log informando que está criando uma nova pessoa.
+        logger.info("Creating a new person!")
 
-        val persons: MutableList<Person> = ArrayList()
-        for (i in 0..10){
-            val person = mockPerson(i)
-            persons.add(person)
-        }
-        return persons
+        // Retornando a instância de Person recebida.
+        return person
+    }
+
+    // Método para atualizar uma pessoa existente.
+    fun update(person: Person): Person {
+        // Registrando uma mensagem de log informando que está atualizando uma pessoa.
+        logger.info("Updating a person!")
+
+        // Retornando a instância de Person recebida.
+        return person
+    }
+
+    // Método para excluir uma pessoa pelo ID.
+    fun delete(id: Long) {
+        // Registrando uma mensagem de log informando que está excluindo uma pessoa pelo ID.
+        logger.info(("Deleting a person by ID!"))
+
+        // Não faz nada.
     }
 
     private fun mockPerson(i: Int): Person {
