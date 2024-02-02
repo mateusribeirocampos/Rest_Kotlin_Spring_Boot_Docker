@@ -3,8 +3,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rest_with_spring_boot_campos?useTimezone=true&serverTimezone=UTC
     username: root
-    password: Admin123
+    password: Admin123#
 jpa:
   hibernate:
-    ddl-auto: update //atuzaliza o banco de dados
-  show-sql: true //mostra o sql no console quando falso não mostra apenas quando existem erros usa-se o true
+    ddl-auto: create #atualiza o banco de dados
+  show-sql: false #mostra o sql no console quando falso não mostra apenas quando existem erros usa-se o true
