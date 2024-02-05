@@ -1,1 +1,14 @@
-
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/playground_rest_kotlin_sb_docker?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: Admin123#
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: false
+      properties:
+        jakarta:
+          persistence:
+            database-platform: org.hibernate.dialect.MySQLDialect # vai definir o dialeto do banco de dados
