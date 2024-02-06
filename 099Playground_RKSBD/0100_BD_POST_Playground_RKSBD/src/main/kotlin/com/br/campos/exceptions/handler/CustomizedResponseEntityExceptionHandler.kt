@@ -12,14 +12,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.lang.Exception
 import java.util.*
 
-@ControllerAdvice // indica que é um controlador de exceções
-@RestController // indica que é um controlador de requisições
+@ControllerAdvice
+@RestController
 class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
 
-    // ExceptionHandler indica que é uma função para tratar exceções
-    @ExceptionHandler(Exception::class)
+    @ExceptionHandler(java.lang.Exception::class)
     // função para tratar exceções específicas
-    fun handleAllExceptions(ex: Exception, request: WebRequest) :
+    fun handleAllExceptions(ex: Exception, request: WebRequest):
             ResponseEntity<ExceptionResponse> { // retorna um objeto do tipo ResponseEntity<ExceptionResponse>
         val exceptionResponse = ExceptionResponse( // cria um objeto do tipo ExceptionResponse
             Date(),  // data atual
@@ -35,8 +34,7 @@ class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(
 
     // ExceptionHandler indica que é uma função para tratar exceções
     @ExceptionHandler(ResourceNotFoundException::class)
-    // função para tratar exceções específicas
-    fun handleResourceNotFoundExceptions(ex: Exception, request: WebRequest) :
+    fun handleResourceNotFoundExceptions(ex: Exception, request: WebRequest):
             ResponseEntity<ExceptionResponse> { // retorna um objeto do tipo ResponseEntity<ExceptionResponse>
         val exceptionResponse = ExceptionResponse( // cria um objeto do tipo ExceptionResponse
             Date(),  // data atual

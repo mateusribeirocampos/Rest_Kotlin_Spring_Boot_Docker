@@ -16,17 +16,17 @@ import java.util.*
 class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(java.lang.Exception::class)
-    fun handleAllExceptions(ex: Exception, request: WebRequest) : ResponseEntity<ExceptionsResponse> {
-    val exceptionsResponse = ExceptionsResponse(
-        Date(),
-        ex.message,
-        request.getDescription(false)
-    )
+    fun handleAllExceptions(ex: Exception, request: WebRequest): ResponseEntity<ExceptionsResponse> {
+        val exceptionsResponse = ExceptionsResponse(
+            Date(),
+            ex.message,
+            request.getDescription(false)
+        )
         return ResponseEntity<ExceptionsResponse>(exceptionsResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
     @ExceptionHandler(ResourceNotFoundException::class)
-    fun handleResourceNotFoundExceptions(ex: Exception, request: WebRequest) : ResponseEntity<ExceptionsResponse> {
+    fun handleResourceNotFoundExceptions(ex: Exception, request: WebRequest): ResponseEntity<ExceptionsResponse> {
         val exceptionsResponse = ExceptionsResponse(
             Date(),
             ex.message,

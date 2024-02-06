@@ -1,7 +1,7 @@
-package com.br.campos.controller
+package br.com.campos.Controller
 
-import com.br.campos.model.Person
-import com.br.campos.services.PersonServices
+import br.com.campos.model.Person
+import br.com.campos.services.PersonServices
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PathVariable
@@ -10,17 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
-@RequestMapping("/person")
+@RestController // Esta anotação é responsável por informar ao Spring que esta classe é um RestController
+@RequestMapping("/person") // Esta anotação é responsável por mapear a URL que será utilizada para acessar este Controller
 class PersonController {
 
-    @Autowired
-    lateinit var services: PersonServices
+    @Autowired // Esta anotação é responsável por informar ao Spring que esta variável será injetada
+    private lateinit var services: PersonServices
 
     @RequestMapping(
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
+
     fun findById(): List<Person> {
         return services.findAll()
     }
@@ -30,8 +31,9 @@ class PersonController {
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
+
     fun findById(
-        @PathVariable("id") id: Long
+        @PathVariable(value = "id") id: Long,
     ): Person {
         return services.findById(id)
     }
@@ -62,4 +64,5 @@ class PersonController {
     fun delete(@PathVariable(value = "id") id: Long) {
         services.delete(id)
     }
+
 }

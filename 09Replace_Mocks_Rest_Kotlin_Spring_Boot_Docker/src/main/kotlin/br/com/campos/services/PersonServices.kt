@@ -4,17 +4,15 @@ import br.com.campos.exceptions.ResourceNotFoundException
 import br.com.campos.model.Person
 import br.com.campos.repository.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
 
-@Service // Esta anotação é responsável por informar ao Spring que esta classe é um Service
+@Service
 class PersonServices {
 
-    @Autowired // Esta anotação é responsável por informar ao Spring que esta variável será injetada
+    @Autowired
     private lateinit var repository: PersonRepository
 
-    // Esta variável é responsável por instanciar a classe SimpleMath
     private val logger = Logger.getLogger(PersonServices::class.java.name)
 
     fun findAll(): List<Person> {
@@ -26,18 +24,18 @@ class PersonServices {
         logger.info("finding one person!")
 
         return repository.findById(id)
-            .orElseThrow {ResourceNotFoundException("No records found for this ID :: $id")}
+            .orElseThrow { ResourceNotFoundException("No records found for this ID: $id") }
     }
 
     fun create(person: Person): Person {
-        logger.info("Create one person with name ${person.firstName}!")
+        logger.info("Creating one person with name ${person.firstName} ${person.lastName}!")
         return repository.save(person)
     }
 
-    fun update(person: Person) : Person{
-        logger.info("Update one person with ID ${person.id}!")
+    fun update(person: Person): Person {
+        logger.info("Updating one person with name ${person.firstName} ${person.lastName}!")
         val entity = repository.findById(person.id)
-            .orElseThrow {ResourceNotFoundException("No records found for this ID :: ${person.id}")}
+            .orElseThrow { ResourceNotFoundException("No records found for this ID: ${person.id}") }
 
         entity.firstName = person.firstName
         entity.lastName = person.lastName
@@ -47,10 +45,9 @@ class PersonServices {
     }
 
     fun delete(id: Long) {
-        logger.info("Delete one person with ID $id!")
+        logger.info("Deleting one person with ID $id!")
         val entity = repository.findById(id)
-            .orElseThrow {ResourceNotFoundException("No records found for this ID :: $id")}
+            .orElseThrow { ResourceNotFoundException("No records found for this ID: $id") }
         repository.delete(entity)
     }
-
 }
