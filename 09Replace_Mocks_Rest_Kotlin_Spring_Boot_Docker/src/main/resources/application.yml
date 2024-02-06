@@ -12,5 +12,3 @@ spring:
       jakarta:
         persistence:
           database-platform: org.hibernate.dialect.MySQLDialect
-
-

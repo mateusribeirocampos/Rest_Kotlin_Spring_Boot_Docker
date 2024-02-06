@@ -11,4 +11,4 @@ spring:
       properties:
         jakarta:
           persistence:
-            database-platform: org.hibernate.dialect.MySQLDialect # vai definir o dialeto do banco de dados
+            database-platform: org.hibernate.dialect.MySQLDialect

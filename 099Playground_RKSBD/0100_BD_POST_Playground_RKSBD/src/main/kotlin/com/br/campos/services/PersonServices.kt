@@ -4,7 +4,7 @@ package com.br.campos.services
 import com.br.campos.exceptions.ResourceNotFoundException
 import com.br.campos.model.Person
 import com.br.campos.repository.PersonRepository
-import org.springframework.data.jpa.domain.AbstractPersistable_
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
@@ -14,6 +14,7 @@ import java.util.logging.Logger
 @Service
 class PersonServices {
 
+    @Autowired
     // lateinit é uma palavra-chave do Kotlin que indica que a variável será inicializada posteriormente.
     private lateinit var repository: PersonRepository // Atributo para acessar o repositório de pessoas.
 
@@ -48,7 +49,6 @@ class PersonServices {
         logger.info("Updating a person with name ${person.firstName} + ${person.lastName}!")
         val entity = repository.findById(person.id)
             .orElseThrow{ ResourceNotFoundException("Person not found for this id $id") }
-
         entity.firstName = person.firstName
         entity.lastName = person.lastName
         entity.birthday = person.birthday
@@ -56,7 +56,6 @@ class PersonServices {
         entity.address = person.address
         entity.gender = person.gender
         return repository.save(entity)
-
     }
 
     // Método para excluir uma pessoa pelo ID.
