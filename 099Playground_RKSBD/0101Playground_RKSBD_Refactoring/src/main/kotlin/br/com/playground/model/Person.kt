@@ -16,31 +16,31 @@ data class Person (
     @Column(name = "last_name", nullable = false, length = 80)
     var lastName: String = "",
 
-    @Column(nullable = false, length = 2)
+    @Column(name = "age", nullable = false, length = 2)
     var age: Int = 0,
 
-    @Column(nullable = false, length = 6)
+    @Column(name = "gender", nullable = false, length = 6)
     var gender: String = "",
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "address", nullable = false, length = 100)
     var address: String,
 
-    @Column(name = "phone_number", nullable = false, length = 15)
+    @Column(name = "phone_number", nullable = false, length = 15, columnDefinition = "VARCHAR(15)")
     var phoneNumber: String = "",
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "email", nullable = false, length = 100)
     var email: String = "",
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "city", nullable = false, length = 80)
     var city: String = "",
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "state", nullable = false, length = 100)
     var state: String = "",
 
-    @Column(nullable = false, length = 30)
+    @Column(name = "country", nullable = false, length = 30)
     var country: String = "",
 
-    @Column(name = "zip_code", nullable = false, length = 10)
+    @Column(name = "zip_code", nullable = false, length = 10, columnDefinition = "VARCHAR(10)")
     var zipCode: String = ""
 
 ) {

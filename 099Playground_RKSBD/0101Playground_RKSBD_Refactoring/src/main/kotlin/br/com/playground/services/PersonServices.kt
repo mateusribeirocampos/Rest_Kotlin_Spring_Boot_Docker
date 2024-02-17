@@ -38,6 +38,8 @@ class PersonServices {
         val entity = repository.findById(person.id)
             .orElseThrow { ResourceNotFoundResponseException("No records found for this ID: ${person.id}") }
 
+        logger.info("Before Updated phone_number ${entity.phoneNumber} and zip_code ${entity.zipCode}!")
+
         entity.firstName = person.firstName
         entity.lastName = person.lastName
         entity.age = person.age
@@ -46,9 +48,12 @@ class PersonServices {
         entity.phoneNumber = person.phoneNumber
         entity.email = person.email
         entity.city = person.city
-        entity.country = person.country
         entity.state = person.state
+        entity.country = person.country
         entity.zipCode = person.zipCode
+
+        logger.info("After Updated phone_number ${entity.phoneNumber} and zip_code ${entity.zipCode}!")
+
         return repository.save(entity)
     }
 
