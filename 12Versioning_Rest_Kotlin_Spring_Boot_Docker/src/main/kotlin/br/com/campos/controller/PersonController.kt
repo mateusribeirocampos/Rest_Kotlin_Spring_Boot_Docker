@@ -1,6 +1,7 @@
 package br.com.campos.controller
 
 import br.com.campos.data.vo.v1.PersonVO
+import br.com.campos.data.vo.v2.PersonVO as PersonVOV2
 import br.com.campos.services.PersonServices
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -23,11 +24,18 @@ class PersonController {
     fun findById(@PathVariable(value = "id") id: Long): PersonVO {
         return services.findById(id)
     }
+
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
     fun create(@RequestBody person: PersonVO): PersonVO {
         return services.create(person)
     }
+    @PostMapping(value = ["/V2"], consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun createV2(@RequestBody person: PersonVOV2): PersonVOV2 {
+        return services.createV2(person)
+    }
+
     @PutMapping(consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
     fun update(@RequestBody person: PersonVO): PersonVO {
